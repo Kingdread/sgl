@@ -36,8 +36,10 @@ Requirements
 Installation
 ------------
 
-No setup.py yet, so just download it and place it where Python can find it, e.g.
-the current directory.
+Run `python setup.py install` to install the library system-wide. If you want
+to install it in "developement mode", use `python setup.py develop`. Of course
+you need to replace `python` with the version you want to use, e.g. `python2`
+or `python3`.
 
 Usage
 -----
@@ -71,7 +73,6 @@ Todo
 * Examples
 * More objects like triangles, circles, rectangles and pyramids, cylinders, ...
 * GUI
-* Create a setup.py
 * Documentation
 
 License
