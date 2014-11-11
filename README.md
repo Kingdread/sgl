@@ -33,6 +33,11 @@ Requirements
 * optional for the visualization: [vtk](http://www.vtk.org)
 * optional for a better experience: [ipython](http://ipython.org)
 
+Documentation
+-------------
+
+At http://kingdread.de/sgl/
+
 Installation
 ------------
 
@@ -73,7 +78,7 @@ Todo
 * Examples
 * More objects like triangles, circles, rectangles and pyramids, cylinders, ...
 * GUI
-* Documentation
+* Tests
 
 License
 -------
