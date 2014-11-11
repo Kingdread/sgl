@@ -2,7 +2,7 @@
 import scipy.linalg
 
 def null(f):
-    return abs(f) < 6e-16
+    return abs(f) < 7e-16
 
 def nullrow(r):
     return all(map(null, r))
