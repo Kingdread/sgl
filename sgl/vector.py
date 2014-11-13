@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import math
-import numpy as np
 class Vector(object):
     """Provides a basic vector"""
     @classmethod
@@ -18,18 +17,18 @@ class Vector(object):
         """
         if len(args) == 3:
             # Initialising with 3 coordinates
-            self._v = np.array(args)
+            self._v = list(args)
         elif len(args) == 2:
             # Initialising from point A to point B
             A, B = args
-            self._v = np.array([
+            self._v = [
                 B.x - A.x,
                 B.y - A.y,
                 B.z - A.z,
-                ])
+            ]
         elif len(args) == 1:
             # Initialising with an array of coordinates
-            self._v = np.array(args[0])
+            self._v = list(args[0])
         else:
             raise TypeError("Vector() takes one, two or three parameters, "
                             "not {}".format(len(args)))
@@ -41,18 +40,18 @@ class Vector(object):
         return "Vector({}, {}, {})".format(*self._v)
     
     def __eq__(self, other):
-        return (self._v == other._v).all()
+        return (self._v == other._v)
 
     def __add__(self, other):
-        return Vector(self._v + other._v)
+        return Vector(x+y for x, y in zip(self, other))
     
     def __sub__(self, other):
-        return Vector(self._v - other._v)
+        return Vector([x-y for x, y in zip(self, other)])
 
     def __mul__(self, other):
         if isinstance(other, Vector):
-            return np.inner(self._v, other._v)
-        return Vector(self._v * other)
+            return sum(x*y for x, y in zip(self, other))
+        return Vector([x*other for x in self._v])
 
     def __rmul__(self, other):
         return self * other
