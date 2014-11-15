@@ -35,19 +35,18 @@ class Solution(object):
     def __init__(self, s):
         self._s = s
         self.varcount = s.shape[1] - 1
-        if any(all(null(coeff) for coeff in row[:-1]) and not null(row[-1])
-                for row in s):
-            # No solution, 0a + 0b + 0c + ... = 1 which can never be true
-            self._solvable = False
-        else:
-            self._solvable = True
-
+        # No solution, 0a + 0b + 0c + ... = 1 which can never be true
+        self._solvable = not any(
+            all(null(coeff) for coeff in row[:-1]) and not null(row[-1])
+            for row in s
+        )
         unique_equations = sum(1 for row in s if not nullrow(row))
         self.varargs = self.varcount - unique_equations
         self.exact =  self.varargs == 0
 
     def __bool__(self):
         return self._solvable
+    __nonzero__ = __bool__
 
     def __call__(self, *v):
         if not self._solvable:
