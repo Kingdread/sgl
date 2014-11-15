@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import math
 import unittest
 from sgl import Vector
@@ -88,7 +89,7 @@ class VectorTest(unittest.TestCase):
     def test_vector_angle(self):
         self.assertAlmostEqual(
             Vector(1, 0, 0).angle(Vector(1, 0, 1)),
-            math.pi / 4,  # 45°
+            math.pi / 4,  # 45 deg
         )
 
     def test_vector_normalization(self):
