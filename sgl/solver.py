@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
-import scipy.linalg
+from __future__ import division
+
+def shape(m):
+    if not m:
+        return (0, 0)
+    return (len(m), len(m[0]))
 
 def null(f):
     return abs(f) < 1e-10
@@ -7,9 +12,48 @@ def null(f):
 def nullrow(r):
     return all(map(null, r))
 
+def find_pivot_row(m):
+    candidates = []
+    for i, row in enumerate(m):
+        # Only rows where the pivot element is not zero can be used
+        if row[0] != 0:
+            candidates.append((abs(row[0]), i))
+    if not candidates:
+        return None
+    # We use the one with the biggest absolute value
+    return max(candidates)[1]
+
+def gaussian_elimination(m):
+    """Return the row echelon form of m by applying the gaussian
+    elimination"""
+    # Shape of the matrix
+    M, N = shape(m)
+    for j in range(N-1):
+        # We ignore everything above the jth row and everything left of
+        # the jth column (we assume they are 0 already)
+        pivot = find_pivot_row([row[j:] for row in m[j:]])
+        if pivot is None:
+            continue
+        # find_pivot_row returns the index relative to j, so we need to
+        # calculate the absolute index
+        pivot += j
+        # Swap the rows
+        m[j], m[pivot] = m[pivot], m[j]
+        # Note that the pivot row is now m[j]!
+        # Eliminate everything else
+        for i in range(j + 1, M):
+            factor = m[i][j] / m[j][j] * -1
+            # Multiply the pivot row before adding them
+            multiplied_row = [factor * x for x in m[j]]
+            # Replace the ith row with the sum of the ith row and the
+            # pivot row
+            m[i] = [x + y for x, y in zip(m[i], multiplied_row)]
+    # m shold now be in row echelon form
+    return m
+
 def solve(matrix):
-    _, s = scipy.linalg.lu(matrix, True)
-    return Solution(s)
+    ref = gaussian_elimination(matrix)
+    return Solution(ref)
 
 def count(f, l):
     c = 0
@@ -34,7 +78,7 @@ class Solution(object):
     """Holds a solution to a system of equations."""
     def __init__(self, s):
         self._s = s
-        self.varcount = s.shape[1] - 1
+        self.varcount = shape(s)[1] - 1
         # No solution, 0a + 0b + 0c + ... = 1 which can never be true
         self._solvable = not any(
             all(null(coeff) for coeff in row[:-1]) and not null(row[-1])
