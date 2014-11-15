@@ -45,6 +45,7 @@ def gaussian_elimination(m):
             factor = m[i][j] / m[j][j] * -1
             # Multiply the pivot row before adding them
             multiplied_row = [factor * x for x in m[j]]
+            # Looks ugly, but we don't need numpy for it
             # Replace the ith row with the sum of the ith row and the
             # pivot row
             m[i] = [x + y for x, y in zip(m[i], multiplied_row)]

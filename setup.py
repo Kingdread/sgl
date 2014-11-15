@@ -38,5 +38,5 @@ setup(
 
         keywords="analytic geometry",
 
-        install_requires=["scipy", "numpy"],
+        install_requires=[],
 )

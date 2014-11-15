@@ -8,11 +8,10 @@ Installation
 Prerequisites
 -------------
 
-It is assumed that you already have Python installed. Installation of sgl will
-automatically install numpy and scipy, as they are required for sgl to work. If
-you want graphic support, you manually need to install `vtk`_ since it is not
-found via pip. Please check their website or your distributions documentation
-on how to install vtk.
+It is assumed that you already have Python installed. If you want graphic
+support, you manually need to install `vtk`_ since it is not found via pip.
+Please check their website or your distributions documentation on how to
+install vtk.
 
 .. _vtk: http://www.vtk.org
 

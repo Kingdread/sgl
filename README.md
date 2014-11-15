@@ -29,7 +29,7 @@ Requirements
 * 1 pinch of salt
 * [Python](http://www.python.org) 2 or 3 (if you want a visualization,
   you need Python 2)
-* [numpy](http://www.numpy.org) and [scipy](http://www.scipy.org)
+* <del>[numpy](http://www.numpy.org) and [scipy](http://www.scipy.org)</del>
 * optional for the visualization: [vtk](http://www.vtk.org)
 * optional for a better experience: [ipython](http://ipython.org)
 
