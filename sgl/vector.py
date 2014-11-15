@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 import math
+
+from .util import unify_types
+
 class Vector(object):
     """Provides a basic vector"""
     @classmethod
@@ -32,6 +35,7 @@ class Vector(object):
         else:
             raise TypeError("Vector() takes one, two or three parameters, "
                             "not {}".format(len(args)))
+        self._v = unify_types(self._v)
 
     def __hash__(self):
         return hash(("Vector",) + tuple(self))

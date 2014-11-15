@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from .util import unify_types
 class Point(object):
     """Provides a basic Point in the 3D space"""
     @classmethod
@@ -19,12 +20,13 @@ class Point(object):
         """
         if len(args) == 1:
             # Initialisation by Vector is also handled by this
-            self.x, self.y, self.z = args[0]
+            coords = args[0]
         elif len(args) == 3:
-            self.x, self.y, self.z = args
+            coords = args
         else:
             raise TypeError("Point() takes one or three arguments, not {}"
                     .format(len(args)))
+        self.x, self.y, self.z = unify_types(coords)
 
     def __repr__(self):
         return "Point({}, {}, {})".format(
